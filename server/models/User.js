@@ -28,6 +28,22 @@ const UserSchema=new Schema({
     data:{
         type:Date,
         default:Date.now
+    },
+    state:{
+        type:Number,
+        default:0
+    },
+    grade:{
+        type:Number
+    },
+    duty:{
+        type:String
+    },
+    worktype:{
+        type:String
+    },
+    workcontent:{
+        type:String
     }
 });
 

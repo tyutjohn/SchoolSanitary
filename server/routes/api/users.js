@@ -66,7 +66,8 @@ router.post('/register', async ctx => {
             name: ctx.request.body.name,
             email: ctx.request.body.email,
             avatar,
-            password: ctx.request.body.password
+            password: ctx.request.body.password,
+            grade:ctx.request.body.grade
         });
 
         //加密密码
