@@ -2,7 +2,7 @@
  * @Author: tyutjohn 
  * @Date: 2019-12-30 15:15:20 
  * @Last Modified by: tyutjohn
- * @Last Modified time: 2019-12-30 16:57:13
+ * @Last Modified time: 2019-12-31 16:24:34
  */
 # SchoolSanitary
 学校卫生管理系统
@@ -29,10 +29,10 @@
 ** 管理员
 ```
 系统基本功能
-    * 登录
+    * 登录          --完成
     * 退出
 系统管理员
-    * 维护卫生工作组成员的信息
+    * 维护卫生工作组成员的信息          --完成
     
 工作组成员
     * 维护卫生活动信息

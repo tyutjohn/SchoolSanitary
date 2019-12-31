@@ -19,6 +19,7 @@ const User = require('../../models/User');
 //引入input验证
 const validateRegisterInput=require('../../validation/register');
 const validateLoginInput=require('../../validation/login');
+const validatorPasswordInput=require('../../validation/password');
 
 /**
  * @route GET api/users/test
@@ -67,7 +68,10 @@ router.post('/register', async ctx => {
             email: ctx.request.body.email,
             avatar,
             password: ctx.request.body.password,
-            grade:ctx.request.body.grade
+            grade:ctx.request.body.grade,
+            duty:ctx.request.body.duty,
+            worktype:ctx.request.body.worktype,
+            workcontent:ctx.request.body.workcontent
         });
 
         //加密密码
@@ -160,5 +164,115 @@ router.get('/current', passport.authenticate('jwt', {
         avatar:ctx.state.user.avatar
     };
 })
+
+/**
+ * @route GET api/users/
+ * @desc 获取用户组信息
+ * @access 接口是私密的
+ */
+router.get('/',passport.authenticate('jwt',{
+    session:false
+}),async ctx=>{
+    //查询
+    await User.find({state:0},(err,doc)=>{
+        if(err){
+            ctx.status=400
+            ctx.body=err
+        }else{
+            ctx.body=doc
+        }
+    })
+})
+
+/**
+ * @route PUT api/users/:email
+ * @desc 修改用户组成员信息
+ * @access 接口是私密的
+ */
+router.put('/:email',passport.authenticate('jwt',{
+    session:false
+}),async ctx=>{
+    const email=ctx.params.email
+    const update={
+        $set:{
+            name:ctx.request.body.name,
+            duty:ctx.request.body.duty,
+            worktype:ctx.request.body.worktype,
+            workcontent:ctx.request.body.workcontent
+        }
+    };
+
+    await User.update({email},update,err=>{
+        if(err){
+            ctx.status=400
+            ctx.body=err
+        }else{
+            ctx.status=200
+            ctx.body='修改成功'
+        }
+    })
+})
+
+/**
+ * @route DELETE api/users/:email
+ * @desc 删除用户组成员信息
+ * @access 接口是私密的
+ */
+router.delete('/:email',passport.authenticate('jwt',{
+    session:false
+}),async ctx=>{
+    const email=ctx.params.email
+    const Vdelete={$set:{state:1}}
+    await User.update({email},Vdelete,err=>{
+        if(err){
+            ctx.status=400
+            ctx.body=err
+        }else{
+            ctx.status=200
+            ctx.body='删除成功'
+        }
+    })
+})
+
+/**
+ * @route POST api/users/password/:email
+ * @desc 更新用户组成员的密码
+ * @access 接口是私密的
+ */
+router.post('/password/:email',async ctx=>{
+    const email=ctx.params.email
+    const {errors,isValid}=validatorPasswordInput(ctx.request.body)
+    //判断验证是否通过
+    if(!isValid){
+        ctx.status=400;
+        ctx.body=errors;
+        return;
+    }
+
+    //定义密码
+    const passwordOld={
+        password:ctx.request.body.password
+    }
+
+    //加密密码
+    passwordOld.password = await new Promise((res, rej) => {
+        bcrypt.hash(passwordOld.password, 10, function (err, hash) {
+            if (err) rej(err)
+            res(hash)
+        });
+    })
+
+    //存储到数据库
+    await User.update({email},{$set:passwordOld},err=>{
+        if(err){
+            ctx.status=400
+            ctx.body=err
+        }else{
+            ctx.status=200
+            ctx.body='修改密码成功'
+        }
+    })
+})
+
 
 module.exports = router.routes();

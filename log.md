@@ -2,7 +2,7 @@
  * @Author: tyutjohn 
  * @Date: 2019-12-30 16:45:48 
  * @Last Modified by: tyutjohn
- * @Last Modified time: 2019-12-31 13:38:22
+ * @Last Modified time: 2019-12-31 16:24:01
  */
 # 后台开发日志
 /*
@@ -122,3 +122,64 @@ Student.js
 Teachact.js
 User.js
 ```
+
+/*
+ * @Date:2019-12-31 14:18
+ */
+ ```
+ 接口开发
+ /**
+ * @route POST api/users/register
+ * @desc 注册接口地址
+ * @access 接口是公开的
+ */
+ 
+/**
+ * @route POST api/users/login
+ * @desc 登陆接口地址 返回token
+ * @access 接口是公开的
+ */
+
+ /**
+ * @route GET api/users/current
+ * @desc 用户信息接口地址 返回用户信息
+ * @access 接口是私密的
+ */
+
+/**
+ * @route GET api/users/
+ * @desc 获取用户组信息
+ * @access 接口是私密的
+ */
+
+ /**
+ * @route PUT api/users/:email
+ * @desc 修改用户组成员信息
+ * @access 接口是私密的
+ */
+
+ /**
+ * @route DELETE api/users/:email
+ * @desc 删除用户组成员信息
+ * @access 接口是私密的
+ */
+
+ /**
+ * @route POST api/users/password/:email
+ * @desc 更新用户组成员的密码
+ * @access 接口是私密的
+ */
+ ```
+
+/*
+ * @Date:2019-12-31 16:23
+ */
+ ```
+ 验证器添加
+ validation\
+    is-empty.js
+    login.js
+    password.js
+    register.js
+```
+
