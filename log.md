@@ -2,9 +2,12 @@
  * @Author: tyutjohn 
  * @Date: 2019-12-30 16:45:48 
  * @Last Modified by: tyutjohn
- * @Last Modified time: 2019-12-30 17:32:15
+ * @Last Modified time: 2019-12-31 13:38:22
  */
 # 后台开发日志
+/*
+ * @Date:2019-12-30 16:45:48
+*/
 * 数据库设计
 * * users表
 用户表
@@ -56,7 +59,7 @@ state       状态(0:正常,1:删除)
 ```
 name        健康教育计划项目名称
 
-person      教育人员   (聚合查询users)
+person      教育人员  
 
 content     教育内容
 
@@ -105,4 +108,17 @@ quants      献血量
 numid       献血证号
 
 date        献血时间
+```
+
+/*
+ * @Date:2019-12-31 13:36
+*/
+```
+定义models下模型文件
+Comblood.js
+Heathact.js
+Issue.js
+Student.js
+Teachact.js
+User.js
 ```
