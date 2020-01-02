@@ -2,7 +2,7 @@
  * @Author: tyutjohn 
  * @Date: 2019-12-30 16:45:48 
  * @Last Modified by: tyutjohn
- * @Last Modified time: 2019-12-31 16:24:01
+ * @Last Modified time: 2020-01-02 15:50:37
  */
 # 后台开发日志
 /*
@@ -51,7 +51,9 @@ condition   活动情况
 
 date        时间
 
-state       状态(0:正常,1:删除)
+actdate     活动时间
+
+state       状态(0:未评定,1:已经评定)
 ```
 
 * * teachacts表
@@ -181,5 +183,47 @@ User.js
     login.js
     password.js
     register.js
+```
+
+/*
+* @Date:2020-1-2 14:10
+*/
+```
+api配置
+在routes\api中新建heathacts.js
+引入router,gravatar验证器，jwttoken验证，koapassport拦截器
+在app.js中引入heathacts.js 
+app.use('heathacts',heathacts);
+
+接口开发
+/**
+ * @router GET api/heathacts/test
+ * @desc 测试接口地址
+ * @access 接口是公开的
+ */
+
+/**
+ * @router POST api/heathacts/add
+ * @desc 添加卫生工作活动
+ * @access 接口是私密的
+ */
+
+/**
+ * @router PUT api/heathacts/grade/:id
+ * @desc 评定每次卫生活动情况
+ * @access 接口是私密的
+ */
+
+/**
+ * @router GET api/heathacts/
+ * @desc 查看卫生活动信息列表
+ * @access 接口是私密的
+ */
+
+ /**
+ * @router DELETC api/heathacts/:id
+ * @desc 删除卫生活动信息
+ * @access 接口是私密的
+ */
 ```
 

@@ -17,9 +17,9 @@ const passport = require('koa-passport');
 const User = require('../../models/User');
 
 //引入input验证
-const validateRegisterInput=require('../../validation/register');
-const validateLoginInput=require('../../validation/login');
-const validatorPasswordInput=require('../../validation/password');
+const validateRegisterInput=require('../../validation/users/register');
+const validateLoginInput=require('../../validation/users/login');
+const validatorPasswordInput=require('../../validation/users/password');
 
 /**
  * @route GET api/users/test

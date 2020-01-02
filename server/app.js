@@ -22,6 +22,8 @@ app.use(bodyParser());
 
 //引入users.js
 const users=require('./routes/api/users');
+//引入heathacts.js
+const heathacts=require('./routes/api/heathacts');
 
 //路由
 router.get('/',async ctx=>{
@@ -46,6 +48,7 @@ require('./config/passport')(passport);
 
 //配置路由地址
 router.use('/api/users',users);
+router.use('/api/heathacts',heathacts);
 
 //配置路由
 app.use(router.routes()).use(router.allowedMethods());

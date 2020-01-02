@@ -2,7 +2,7 @@
  * @Author: tyutjohn 
  * @Date: 2019-12-30 17:47:10 
  * @Last Modified by: tyutjohn
- * @Last Modified time: 2019-12-30 17:52:00
+ * @Last Modified time: 2020-01-02 14:17:42
  */
 const mongoose=require('mongoose')
 const Schema=mongoose.Schema;
@@ -28,7 +28,11 @@ const HeathSchema=new Schema({
         type:String
     },
     date:{
-        type:Date
+        type:Date,
+        default:Date.now
+    },
+    actdate:{
+        type:String
     },
     state:{
         type:Number,
