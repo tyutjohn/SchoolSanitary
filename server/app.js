@@ -24,6 +24,14 @@ app.use(bodyParser());
 const users=require('./routes/api/users');
 //引入heathacts.js
 const heathacts=require('./routes/api/heathacts');
+//引入teachacts.js
+const teachacts=require('./routes/api/teachacts');
+//引入issues.js
+const issues=require('./routes/api/issues');
+//引入combloods.js
+const combloods=require('./routes/api/combloods');
+//引入students.js
+const students=require('./routes/api/students');
 
 //路由
 router.get('/',async ctx=>{
@@ -49,6 +57,10 @@ require('./config/passport')(passport);
 //配置路由地址
 router.use('/api/users',users);
 router.use('/api/heathacts',heathacts);
+router.use('/api/teachacts',teachacts);
+router.use('/api/issues',issues);
+router.use('/api/combloods',combloods);
+router.use('/api/students',students);
 
 //配置路由
 app.use(router.routes()).use(router.allowedMethods());

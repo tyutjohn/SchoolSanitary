@@ -19,4 +19,4 @@ const CombloodSchema=new Schema({
     }
 });
 
-module.exports=CombloodSchema=mongoose.model('combloods',CombloodSchema);
+module.exports=Comblood=mongoose.model('combloods',CombloodSchema);

@@ -2,7 +2,7 @@
  * @Author: tyutjohn 
  * @Date: 2019-12-30 16:45:48 
  * @Last Modified by: tyutjohn
- * @Last Modified time: 2020-01-02 15:50:37
+ * @Last Modified time: 2020-01-05 22:27:29
  */
 # 后台开发日志
 /*
@@ -227,3 +227,170 @@ app.use('heathacts',heathacts);
  */
 ```
 
+/*
+* @Date:2020-1-5 20:05
+*/
+```
+api配置
+在routes\api中新建teachacts.js
+引入router,gravatar验证器，jwttoken验证，koapassport拦截器
+在app.js中引入teachacts.js 
+app.use('teachacts',teachacts);
+
+接口开发
+/**
+ * @router  GET api/teachacts/test
+ * @desc 测试接口地址
+ * @access 接口是公开的
+ */
+
+/**
+ * @router  POST api/teachacts/add
+ * @desc 提供健康教育工作
+ * @access 接口是私密的
+ */
+
+/**
+ * @router  PUT api/teachacts/:id
+ * @desc 修改健康教育活动
+ * @access 接口是私密的
+ */
+
+ /**
+ * @router  GET api/teachacts/
+ * @desc 获取健康活动信息列表
+ * @access 接口是私密的
+ */
+
+ /**
+ * @router  DELETC api/teachacts/:id
+ * @desc 删除教育活动信息
+ * @access 接口是私密的
+ */
+ ```
+
+ /*
+* @Date:2020-1-5 21:04
+*/
+```
+api配置
+在routes\api中新建issues.js
+引入router,gravatar验证器，jwttoken验证，koapassport拦截器
+在app.js中引入issues.js 
+app.use('issues',issues);
+
+接口开发
+/**
+ * @router GET api/issues/test
+ * @desc 测试接口地址
+ * @access 接口是公开的
+ */
+
+/**
+ * @router  POST api/issues/add
+ * @desc 添加常见病例
+ * @access 接口是私密的
+ */
+
+ /**
+ * @router  PUT api/issues/:id
+ * @desc 修改常见病例
+ * @access 接口是私密的
+ */
+
+/**
+ * @router  GET api/issues/
+ * @desc 获取常见病列表
+ * @access 接口是私密的
+ */
+
+ /**
+ * @router  DELETC api/issues/:id
+ * @desc 删除常见病信息
+ * @access 接口是私密的
+ */
+ ```
+
+/*
+* @Date:2020-1-5 21:04
+*/
+```
+api配置
+在routes\api中新建combloods.js
+引入router,gravatar验证器，jwttoken验证，koapassport拦截器
+在app.js中引入issues.js 
+app.use('combloods',combloods);
+
+接口开放
+/**
+ * @router GET api/combloods/test
+ * @desc 测试接口地址
+ * @access 接口是公开的
+ */
+
+/**
+ * @router POST api/combloods/add
+ * @desc 添加献血者信息
+ * @access 接口是私密的
+ */
+
+ /**
+ * @router PUT api/combloods/:id
+ * @desc 修改献血者信息
+ * @access 接口是私密的
+ */
+
+/**
+ * @router GET api/combloods/
+ * @desc 查看献血者信息列表
+ * @access 接口是私密的
+ */
+
+/**
+ * @router DELETC api/combloods/:id
+ * @desc 删除献血者信息
+ * @access 接口是私密的
+ */
+ ```
+
+ /*
+* @Date:2020-1-5 22：10
+*/
+```
+api配置
+在routes\api中新建students.js
+引入router,gravatar验证器，jwttoken验证，koapassport拦截器
+在app.js中引入issues.js 
+app.use('students',students);
+
+接口开发
+/**
+ * @router GET api/students/test
+ * @desc 测试接口地址
+ * @access 接口是公开的
+ */
+
+/**
+ * @router POST api/students/add
+ * @desc 添加学生信息
+ * @access 接口是私密的
+ */
+
+ /**
+ * @router PUT api/students/:id
+ * @desc 修改学生信息
+ * @access 接口是私密的
+ */
+
+/**
+ * @router GET api/students/
+ * @desc 查看献血者信息列表
+ * @access 接口是私密的
+ */
+
+/**
+ * @router DELETC api/students/:id
+ * @desc 删除献血者信息
+ * @access 接口是私密的
+ */
+ ```

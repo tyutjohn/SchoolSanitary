@@ -13,7 +13,7 @@ const TeachSchema=new Schema({
         type:String
     },
     date:{
-        type:Date
+        type:String
     },
     state:{
         type:Number,
@@ -21,4 +21,4 @@ const TeachSchema=new Schema({
     }
 });
 
-module.exports=TeachSchema=mongoose.model('teachacts',TeachSchema);
+module.exports=Teathact=mongoose.model('teachacts',TeachSchema);

@@ -21,4 +21,4 @@ const IssueSchema=new Schema({
     }
 });
 
-module.exports=IssueSchema=mongoose.model('issues',IssueSchema);
+module.exports=Issue=mongoose.model('issues',IssueSchema);

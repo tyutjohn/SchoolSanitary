@@ -7,10 +7,10 @@ const StudentSchema=new Schema({
         type:String
     },
     grade:{
-        type:Number
+        type:String
     },
     class:{
-        type:String
+        type:Number
     },
     issusname:{
         type:String
@@ -24,4 +24,4 @@ const StudentSchema=new Schema({
     }
 });
 
-module.exports=StudentSchema=mongoose.model('students',StudentSchema);
+module.exports=Student=mongoose.model('students',StudentSchema);
