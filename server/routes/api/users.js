@@ -12,14 +12,15 @@ const gravatar = require('gravatar');
 const jwt = require('jsonwebtoken');
 const secretOrKey = require('../../config/mongodb').secretOrKey;
 const passport = require('koa-passport');
+const mongoose=require('mongoose')
 
 //引入User
 const User = require('../../models/User');
 
 //引入input验证
-const validateRegisterInput=require('../../validation/users/register');
-const validateLoginInput=require('../../validation/users/login');
-const validatorPasswordInput=require('../../validation/users/password');
+const validateRegisterInput = require('../../validation/users/register');
+const validateLoginInput = require('../../validation/users/login');
+const validatorPasswordInput = require('../../validation/users/password');
 
 /**
  * @route GET api/users/test
@@ -40,20 +41,33 @@ router.get('/test', async ctx => {
  * @access 接口是公开的
  */
 router.post('/register', async ctx => {
-    const {errors,isValid} =validateRegisterInput(ctx.request.body);
-    //判断是否验证通过
-    if(!isValid){
-        ctx.status=400;
-        ctx.body=errors;
+    //查询权限
+    const authority = await User.findOne({
+        email: ctx.request.body.authority
+    })
+    if (authority.grade == 1) {
+        ctx.status = 400;
+        ctx.body = '权限不足';
         return;
     }
+    const {
+        errors,
+        isValid
+    } = validateRegisterInput(ctx.request.body);
+    //判断是否验证通过
+    if (!isValid) {
+        ctx.status = 400;
+        ctx.body = errors;
+        return;
+    }
+
     //存储到数据库
     const findResult = await User.find({
         email: ctx.request.body.email
     });
     // console.log(findResult);
     if (findResult.length > 0) {
-        ctx.status = 500;
+        ctx.data = false;
         ctx.body = {
             email: '邮箱已经被占用'
         };
@@ -68,10 +82,10 @@ router.post('/register', async ctx => {
             email: ctx.request.body.email,
             avatar,
             password: ctx.request.body.password,
-            grade:ctx.request.body.grade,
-            duty:ctx.request.body.duty,
-            worktype:ctx.request.body.worktype,
-            workcontent:ctx.request.body.workcontent
+            grade: ctx.request.body.grade,
+            duty: ctx.request.body.duty,
+            worktype: ctx.request.body.worktype,
+            workcontent: ctx.request.body.workcontent
         });
 
         //加密密码
@@ -100,11 +114,14 @@ router.post('/register', async ctx => {
  * @access 接口是公开的
  */
 router.post('/login', async ctx => {
-    const {errors,isValid} =validateLoginInput(ctx.request.body);
+    const {
+        errors,
+        isValid
+    } = validateLoginInput(ctx.request.body);
     //判断是否验证通过
-    if(!isValid){
-        ctx.status=400;
-        ctx.body=errors;
+    if (!isValid) {
+        ctx.status = 400;
+        ctx.body = errors;
         return;
     }
     //查询
@@ -129,10 +146,11 @@ router.post('/login', async ctx => {
             const payload = {
                 id: user.id,
                 name: user.name,
-                avatar: user.avatar
+                avatar: user.avatar,
+                grade: user.grade
             };
             const token = jwt.sign(payload, secretOrKey, {
-                expiresIn: 3600
+                expiresIn: "6h"
             })
 
             ctx.status = 200;
@@ -158,10 +176,11 @@ router.get('/current', passport.authenticate('jwt', {
     session: false
 }), async ctx => {
     ctx.body = {
-        id:ctx.state.user.id,
-        name:ctx.state.user.name,
-        email:ctx.state.user.email,
-        avatar:ctx.state.user.avatar
+        id: ctx.state.user.id,
+        name: ctx.state.user.name,
+        email: ctx.state.user.email,
+        avatar: ctx.state.user.avatar,
+        grade: ctx.state.user.grade
     };
 })
 
@@ -170,18 +189,34 @@ router.get('/current', passport.authenticate('jwt', {
  * @desc 获取用户组信息
  * @access 接口是私密的
  */
-router.get('/',passport.authenticate('jwt',{
-    session:false
-}),async ctx=>{
-    //查询
-    await User.find({state:0},(err,doc)=>{
-        if(err){
-            ctx.status=400
-            ctx.body=err
-        }else{
-            ctx.body=doc
-        }
-    })
+router.get('/', passport.authenticate('jwt', {
+    session: false
+}), async ctx => {
+    //权限设置
+    if (ctx.request.query.grade==1) {
+        //查询自身
+        let _id=mongoose.Types.ObjectId(ctx.request.query.id)
+        await User.find({_id:_id},(err,docs)=>{
+            if(err){
+                ctx.status==400
+                ctx.body=err
+            }else{
+                ctx.body=docs
+            }
+        })
+    } else {
+        //查询所有
+        await User.find({
+            state: 0
+        }, (err, doc) => {
+            if (err) {
+                ctx.status = 400
+                ctx.body = err
+            } else {
+                ctx.body = doc
+            }
+        })
+    }
 })
 
 /**
@@ -189,26 +224,29 @@ router.get('/',passport.authenticate('jwt',{
  * @desc 修改用户组成员信息
  * @access 接口是私密的
  */
-router.put('/:email',passport.authenticate('jwt',{
-    session:false
-}),async ctx=>{
-    const email=ctx.params.email
-    const update={
-        $set:{
-            name:ctx.request.body.name,
-            duty:ctx.request.body.duty,
-            worktype:ctx.request.body.worktype,
-            workcontent:ctx.request.body.workcontent
+router.put('/:email', passport.authenticate('jwt', {
+    session: false
+}), async ctx => {
+    //设置修改
+    const email = ctx.params.email
+    const update = {
+        $set: {
+            name: ctx.request.body.name,
+            duty: ctx.request.body.duty,
+            worktype: ctx.request.body.worktype,
+            workcontent: ctx.request.body.workcontent
         }
     };
 
-    await User.update({email},update,err=>{
-        if(err){
-            ctx.status=400
-            ctx.body=err
-        }else{
-            ctx.status=200
-            ctx.body='修改成功'
+    await User.updateOne({
+        email
+    }, update, err => {
+        if (err) {
+            ctx.status = 400
+            ctx.body = err
+        } else {
+            ctx.status = 200
+            ctx.body = '修改成功'
         }
     })
 })
@@ -218,18 +256,25 @@ router.put('/:email',passport.authenticate('jwt',{
  * @desc 删除用户组成员信息
  * @access 接口是私密的
  */
-router.delete('/:email',passport.authenticate('jwt',{
-    session:false
-}),async ctx=>{
-    const email=ctx.params.email
-    const Vdelete={$set:{state:1}}
-    await User.update({email},Vdelete,err=>{
-        if(err){
-            ctx.status=400
-            ctx.body=err
-        }else{
-            ctx.status=200
-            ctx.body='删除成功'
+router.delete('/:email', passport.authenticate('jwt', {
+    session: false
+}), async ctx => {
+    //设置删除
+    const email = ctx.params.email
+    const Vdelete = {
+        $set: {
+            state: 1
+        }
+    }
+    await User.update({
+        email
+    }, Vdelete, err => {
+        if (err) {
+            ctx.status = 400
+            ctx.body = err
+        } else {
+            ctx.status = 200
+            ctx.body = '删除成功'
         }
     })
 })
@@ -239,19 +284,23 @@ router.delete('/:email',passport.authenticate('jwt',{
  * @desc 更新用户组成员的密码
  * @access 接口是私密的
  */
-router.post('/password/:email',async ctx=>{
-    const email=ctx.params.email
-    const {errors,isValid}=validatorPasswordInput(ctx.request.body)
+router.post('/password/:email', async ctx => {
+    //设置修改
+    const email = ctx.params.email
+    const {
+        errors,
+        isValid
+    } = validatorPasswordInput(ctx.request.body)
     //判断验证是否通过
-    if(!isValid){
-        ctx.status=400;
-        ctx.body=errors;
+    if (!isValid) {
+        ctx.status = 400;
+        ctx.body = errors;
         return;
     }
 
     //定义密码
-    const passwordOld={
-        password:ctx.request.body.password
+    const passwordOld = {
+        password: ctx.request.body.password
     }
 
     //加密密码
@@ -263,13 +312,17 @@ router.post('/password/:email',async ctx=>{
     })
 
     //存储到数据库
-    await User.update({email},{$set:passwordOld},err=>{
-        if(err){
-            ctx.status=400
-            ctx.body=err
-        }else{
-            ctx.status=200
-            ctx.body='修改密码成功'
+    await User.update({
+        email
+    }, {
+        $set: passwordOld
+    }, err => {
+        if (err) {
+            ctx.status = 400
+            ctx.body = err
+        } else {
+            ctx.status = 200
+            ctx.body = '修改密码成功'
         }
     })
 })

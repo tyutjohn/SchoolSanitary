@@ -11,11 +11,11 @@
       <el-card class="box-card">
         <el-row>
           <el-col :span="12">
-            <img :src="BoardSrc" width="100%" height="100%">
+            <img :src="BoardSrc" width="100%" height="100%" style="margin-top:10%">
           </el-col>
           <el-col :span="12">
             <el-form :label-position="labelPosition" label-width="80px" :model="formlogin" style="width:100%">
-              <p class="form-p">vue-cli3后台管理系统</p>
+              <p class="form-p">学校卫生管理系统</p>
               <el-form-item label="用户名">
                 <el-input v-model="formlogin.email" style="width:80%" @keyup.enter.native="nextFocus()"></el-input>
               </el-form-item>
@@ -26,7 +26,7 @@
               <el-button type="primary" class="button"
                 style="margin:0 auto;display:block;border-radius:20px;font-size:16px" @click="login()">登陆</el-button>
             </el-form>
-            <p class="bottom">johnwang版权所有@ 2019-2029</p>
+            <p class="bottom">tyutjohn版权所有@ 2020-2030</p>
           </el-col>
         </el-row>
       </el-card>

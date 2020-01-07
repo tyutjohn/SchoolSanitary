@@ -27,42 +27,45 @@
                     <el-submenu index="1">
                         <template slot="title">
                             <i class="el-icon-location"></i>
-                            <span>导航一</span>
+                            <span>卫生活动管理</span>
                         </template>
                         <el-menu-item-group>
                             <template slot="title">分组一</template>
-                            <el-menu-item index="1-1">选项1</el-menu-item>
-                            <el-menu-item index="1-2">选项2</el-menu-item>
+                            <el-menu-item index="1-1">卫生活动安排</el-menu-item>
                         </el-menu-item-group>
                         <el-menu-item-group title="分组2">
-                            <el-menu-item index="1-3">选项3</el-menu-item>
+                            <el-menu-item index="1-2">健康教育管理</el-menu-item>
                         </el-menu-item-group>
-                        <el-submenu index="1-4">
-                            <template slot="title">选项4</template>
-                            <el-menu-item index="1-4-1">选项1</el-menu-item>
-                        </el-submenu>
                     </el-submenu>
                     <el-menu-item index="2">
                         <i class="el-icon-menu"></i>
-                        <span slot="title">导航二</span>
+                        <span slot="title">常见病防治管理</span>
                     </el-menu-item>
                     <el-menu-item index="3">
                         <i class="el-icon-document"></i>
-                        <span slot="title">导航三</span>
+                        <span slot="title">公益献血管理</span>
                     </el-menu-item>
                     <el-submenu index="4">
+                        <template slot="title">
+                            <i class="el-icon-location"></i>
+                            <span>学生信息管理</span>
+                        </template>
+                        <el-menu-item-group>
+                            <template slot="title">分组一</template>
+                            <el-menu-item index="4-1">学生体验管理</el-menu-item>
+                        </el-menu-item-group>
+                        <el-menu-item-group title="分组2">
+                            <el-menu-item index="4-2">综合体制管理</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <el-submenu index="5">
                         <template slot="title">
                             <i class="el-icon-location"></i>
                             <span>系统设置</span>
                         </template>
                         <el-menu-item-group>
                             <template slot="title">管理员</template>
-                            <el-menu-item index="4-1">用户管理</el-menu-item>
-                            <el-menu-item index="4-2">添加用户</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="系统配置">
-                            <el-menu-item index="4-3">配置一</el-menu-item>
-                            <el-menu-item index="4-4">配置二</el-menu-item>
+                            <el-menu-item index="5-1">卫生工作组成员管理</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                 </el-menu>
@@ -168,7 +171,10 @@
                     }
                 }).then(res => {
                     this.user.userAvatarSrc = res.data.avatar,
-                        this.user.userName = res.data.name
+                    this.user.userName = res.data.name
+                    //将grade权限存入sessionStorage
+                    sessionStorage.setItem("userGrade",res.data.grade);
+                    sessionStorage.setItem("userId",res.data.id);
                 })
             },
             handleOpen(key, keyPath) {
@@ -180,7 +186,7 @@
             //动态加载工作区组件
             componentMount(key) {
                 switch (key) {
-                    case '4-1':
+                    case '5-1':
                         this.$router.push('/Adminuser');
                         break;
                     case '4-2':
