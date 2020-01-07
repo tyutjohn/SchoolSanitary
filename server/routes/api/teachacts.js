@@ -103,7 +103,7 @@ router.get('/',passport.authenticate('jwt',{
 })
 
 /**
- * @router  DELETC api/teachacts/:id
+ * @router  DELETE api/teachacts/:id
  * @desc 删除教育活动信息
  * @access 接口是私密的
  */
