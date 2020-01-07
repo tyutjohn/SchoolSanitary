@@ -2,6 +2,7 @@ const Router=require('koa-router');
 const router=new Router();
 const passport=require('koa-passport');
 const mongoose=require('mongoose')
+const random=require('string-random')
 
 //引入Comblood
 const Comblood=require('../../models/Comblood');
@@ -41,7 +42,7 @@ router.post('/add',passport.authenticate('jwt',{
     const newAct=new Comblood({
         bloname:ctx.request.body.bloname,
         quants:ctx.request.body.quants,
-        numid:ctx.request.body.numid
+        numid:random(16)
     });
 
     await newAct.save().then(doc=>{
@@ -66,8 +67,7 @@ router.put('/:id',passport.authenticate('jwt',{
     const update={
         $set:{
             bloname:ctx.request.body.bloname,
-            quants:ctx.request.body.quants,
-            numid:ctx.request.body.numid
+            quants:ctx.request.body.quants
         }
     };
     //更新数据

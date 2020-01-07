@@ -9,10 +9,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login'
 import Home from '../views/Home'
-import Calendar from '../components/Calendar'
 import Adminuser from '../components/Adminuser'
 import HeathActivity from '../components/HeathActivity'
 import HeathTeach from '../components/HeathTeach'
+import StudentDisease from '../components/StudentDisease'
+import PublicBlood from '../components/PublicBlood'
 
 Vue.use(VueRouter)
 
@@ -22,10 +23,6 @@ const routes = [{
     component: Home,
     children:[
       {
-        path:'/Calendar',
-        name:'calendar',
-        component:Calendar
-      },{
         path:'/Adminuser',
         name:'adminuser',
         component:Adminuser
@@ -37,6 +34,14 @@ const routes = [{
         path:'/HeathTeach',
         name:'heathteach',
         component:HeathTeach
+      },{
+        path:'/StudentDisease',
+        name:'studentdisease',
+        component:StudentDisease
+      },{
+        path:'/PublicBlood',
+        name:'publicBlood',
+        component:PublicBlood
       }
     ]
   },

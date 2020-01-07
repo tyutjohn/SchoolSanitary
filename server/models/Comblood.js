@@ -11,7 +11,7 @@ const CombloodSchema=new Schema({
         type:String
     },
     numid:{
-        type:Number
+        type:String
     },
     date:{
         type:Date,

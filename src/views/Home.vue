@@ -192,6 +192,12 @@
                     case '1-2':
                         this.$router.push('/HeathTeach');
                         break;
+                    case '2':
+                        this.$router.push('/StudentDisease');
+                        break;
+                    case '3':
+                        this.$router.push('/PublicBlood');
+                        break;
                     case '5-1':
                         this.$router.push('/Adminuser');
                         break;
