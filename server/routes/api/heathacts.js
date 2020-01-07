@@ -5,6 +5,8 @@ const mongoose=require('mongoose')
 
 //引入Heathact
 const Heathact=require('../../models/Heathact');
+//引入User
+const User=require('../../models/User');
 
 //引入input验证
 const validateAddInput=require('../../validation/heathacts/add');
@@ -105,7 +107,7 @@ router.get('/',passport.authenticate('jwt',{
 })
 
 /**
- * @router DELETC api/heathacts/:id
+ * @router DELETE api/heathacts/:id
  * @desc 删除卫生活动信息
  * @access 接口是私密的
  */
@@ -120,6 +122,25 @@ router.delete('/:id',passport.authenticate('jwt',{
         }else{
             ctx.status=200
             ctx.body='删除成功'
+        }
+    })
+})
+
+/**
+ * @router GET api/heathacts/principal
+ * @desc 查询活动负责人
+ * @access 接口是私密的
+ */
+router.get('/principal',passport.authenticate('jwt',{
+    session:false
+}),async ctx=>{
+    await User.find({state:0},{name:1},(err,doc)=>{
+        if(err){
+            ctx.status=400
+            ctx.body=err
+        }else{
+            ctx.status=200
+            ctx.body=doc
         }
     })
 })

@@ -10,8 +10,9 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login'
 import Home from '../views/Home'
 import Calendar from '../components/Calendar'
-import Editor from '../components/Editor'
 import Adminuser from '../components/Adminuser'
+import HeathActivity from '../components/HeathActivity'
+import HeathTeach from '../components/HeathTeach'
 
 Vue.use(VueRouter)
 
@@ -25,13 +26,17 @@ const routes = [{
         name:'calendar',
         component:Calendar
       },{
-        path:'/Editor',
-        name:'editor',
-        component:Editor
-      },{
         path:'/Adminuser',
         name:'adminuser',
         component:Adminuser
+      },{
+        path:'/HeathActivity',
+        name:'heathactivity',
+        component:HeathActivity
+      },{
+        path:'/HeathTeach',
+        name:'heathteach',
+        component:HeathTeach
       }
     ]
   },

@@ -186,11 +186,14 @@
             //动态加载工作区组件
             componentMount(key) {
                 switch (key) {
+                    case '1-1':
+                        this.$router.push('/HeathActivity');
+                        break;
+                    case '1-2':
+                        this.$router.push('/HeathTeach');
+                        break;
                     case '5-1':
                         this.$router.push('/Adminuser');
-                        break;
-                    case '4-2':
-                        // this.$router.push('/Editor');
                         break;
                 }
             },

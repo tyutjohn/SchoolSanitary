@@ -2,7 +2,7 @@
  * @Author: tyutjohn 
  * @Date: 2019-12-30 15:15:20 
  * @Last Modified by: tyutjohn
- * @Last Modified time: 2020-01-05 22:25:29
+ * @Last Modified time: 2020-01-07 11:25:18
  */
 # SchoolSanitary
 学校卫生管理系统
@@ -44,17 +44,16 @@
 ## 前台开发
 * view开发
 ```
-Login   \\登录页面
-Home    \\系统主页
+Login   \\登录页面              --完成
+Home    \\系统主页              --完成
 
 ```
 * components组件
 ```
-Header          \\头部
-Bottom          \\尾部
-Adminuser       \\超级管理员模块
-WorkGroup       \\工作组成员信息模快
-HeathActivity   \\卫生活动信息模快
+Header          \\头部              --完成
+Bottom          \\尾部              --完成
+Adminuser       \\工作组管理员模块        --完成
+HeathActivity   \\卫生活动信息模快        --完成
 HeathTeach      \\健康教育工作模块
 StudentBody     \\学生体验管理模块
 CommonDisease   \\常见病管理模块

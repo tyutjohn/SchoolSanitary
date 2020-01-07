@@ -6,7 +6,7 @@
  * @Github: https://github.com/tyutjohn
  -->
 <template>
-  <div>
+  <div :style="height" style="overflow:hidden">
     <div class="admin-header">
       <el-breadcrumb separator="/" class="admin-header-crumb">
         <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
@@ -224,7 +224,10 @@
             trigger: 'blur'
           }]
         },
-        authority: sessionStorage.getItem('userName') //权限身份获取
+        authority: sessionStorage.getItem('userName'), //权限身份获取
+        height:{//自适应高度
+          height: document.body.scrollHeight - 80 + 'px'
+        }
       };
     },
 
