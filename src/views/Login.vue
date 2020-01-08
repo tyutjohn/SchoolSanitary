@@ -111,9 +111,9 @@
               //将用户名和token放入sessionStorage
               sessionStorage.setItem("userName", this.formlogin.email);
               sessionStorage.setItem("userToken", res.data.token);
+              sessionStorage.setItem("isLogin",true);
               //将信息存入vuex
-              this.$store.dispatch("setUser", this.formlogin.email);
-              this.$store.dispatch("setToken", res.data.token);
+              this.$store.dispatch("setAdmin", this.formlogin.email);
               this.$router.push({
                 path: '/Home'
               })

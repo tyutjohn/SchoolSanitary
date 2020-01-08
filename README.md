@@ -2,7 +2,7 @@
  * @Author: tyutjohn 
  * @Date: 2019-12-30 15:15:20 
  * @Last Modified by: tyutjohn
- * @Last Modified time: 2020-01-07 17:26:30
+ * @Last Modified time: 2020-01-08 08:44:46
  */
 # SchoolSanitary
 学校卫生管理系统
@@ -55,9 +55,9 @@ Bottom          \\尾部              --完成
 Adminuser       \\工作组管理员模块        --完成
 HeathActivity   \\卫生活动信息模快        --完成
 HeathTeach      \\健康教育工作模块        --完成
-StudentBody     \\学生体验管理模块
+StudentBody     \\学生体验管理模块        --完成
 CommonDisease   \\常见病管理模块          --完成
-StudentDisease  \\学生常见病管理模块
+StudentDisease  \\学生常见病管理模块      --完成
 PublicBlood     \\公益献血模块            --完成
 StudentSys      \\综合体质管理
 ```

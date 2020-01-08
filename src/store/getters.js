@@ -5,5 +5,16 @@
  * @LastAuthor: Do not edit
  * @Github: https://github.com/tyutjohn
  */
-export const currentUser=state=>state.currentUser
-export const isLogin=state=> state.isLogin
+const getters={
+    currentUser(state){
+        return state.currentUser
+    },
+    isLogin(state){
+        return state.isLogin
+    },
+    getUsername(state){
+        return state.username
+    }
+}
+
+export default getters

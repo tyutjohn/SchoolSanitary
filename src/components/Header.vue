@@ -27,7 +27,9 @@
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>我的资料</el-dropdown-item>
               <el-dropdown-item>修改信息</el-dropdown-item>
-              <el-dropdown-item>退出登陆</el-dropdown-item>
+              <el-dropdown-item>
+                 <p @click="logOut()">退出登陆</p>
+              </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -61,6 +63,9 @@
 </style>
 
 <script>
+import {
+    Loading
+  } from 'element-ui';
   export default {
     data() {
       return {
@@ -78,7 +83,21 @@
 
     mounted() {},
 
-    methods: {},
+    methods: {
+      logOut(){
+         Loading.service({
+              fullscreen: true,
+              text: '退出成功'
+            });
+            sessionStorage.clear();
+            setTimeout(() => {
+              this.$router.push({
+                path: '/Login'
+              })
+              Loading.service().close();
+            }, 1000)
+      }
+    },
 
     watch: {}
 

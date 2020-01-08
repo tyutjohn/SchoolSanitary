@@ -42,30 +42,34 @@
                         <span slot="title">常见病防治管理</span>
                     </el-menu-item>
                     <el-menu-item index="3">
+                        <i class="el-icon-menu"></i>
+                        <span slot="title">常见病学生统计</span>
+                    </el-menu-item>
+                    <el-menu-item index="4">
                         <i class="el-icon-document"></i>
                         <span slot="title">公益献血管理</span>
                     </el-menu-item>
-                    <el-submenu index="4">
+                    <el-submenu index="5">
                         <template slot="title">
                             <i class="el-icon-location"></i>
                             <span>学生信息管理</span>
                         </template>
                         <el-menu-item-group>
                             <template slot="title">分组一</template>
-                            <el-menu-item index="4-1">学生体验管理</el-menu-item>
+                            <el-menu-item index="5-1">学生体验管理</el-menu-item>
                         </el-menu-item-group>
                         <el-menu-item-group title="分组2">
-                            <el-menu-item index="4-2">综合体制管理</el-menu-item>
+                            <el-menu-item index="5-2">综合体制管理</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
-                    <el-submenu index="5">
+                    <el-submenu index="6">
                         <template slot="title">
                             <i class="el-icon-location"></i>
                             <span>系统设置</span>
                         </template>
                         <el-menu-item-group>
                             <template slot="title">管理员</template>
-                            <el-menu-item index="5-1">卫生工作组成员管理</el-menu-item>
+                            <el-menu-item index="6-1">卫生工作组成员管理</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                 </el-menu>
@@ -196,9 +200,18 @@
                         this.$router.push('/StudentDisease');
                         break;
                     case '3':
+                        this.$router.push('/DiseaseCount');
+                        break;
+                    case '4':
                         this.$router.push('/PublicBlood');
                         break;
                     case '5-1':
+                        this.$router.push('/StudentBody');
+                        break;
+                    case '5-2':
+                        this.$router.push('/StudentsSys');
+                        break;
+                    case '6-1':
                         this.$router.push('/Adminuser');
                         break;
                 }

@@ -4,8 +4,7 @@ const Schema=mongoose.Schema;
 //实例化数据
 const CombloodSchema=new Schema({
     bloname:{
-        type:String,
-        ref:'students'
+        type:String
     },
     quants:{
         type:String

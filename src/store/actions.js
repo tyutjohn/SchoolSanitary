@@ -5,6 +5,14 @@
  * @LastAuthor: Do not edit
  * @Github: https://github.com/tyutjohn
  */
-export const setUser=({commit},user)=>{
-    commit("userStatus",user)
+const actions ={
+    setUser({commit},user){
+        commit("userStatus",user)
+    },
+    setAdmin({commit},username){
+        commit("usernameStatus",username)
+    }
 }
+
+
+export default actions;
