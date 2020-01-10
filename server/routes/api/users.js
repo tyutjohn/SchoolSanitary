@@ -42,14 +42,14 @@ router.get('/test', async ctx => {
  */
 router.post('/register', async ctx => {
     //查询权限
-    const authority = await User.findOne({
-        email: ctx.request.body.authority
-    })
-    if (authority.grade == 1) {
-        ctx.status = 400;
-        ctx.body = '权限不足';
-        return;
-    }
+    // const authority = await User.findOne({
+    //     email: ctx.request.body.authority
+    // })
+    // if (authority.grade == 1) {
+    //     ctx.status = 400;
+    //     ctx.body = '权限不足';
+    //     return;
+    // }
     const {
         errors,
         isValid

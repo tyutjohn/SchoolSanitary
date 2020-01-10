@@ -2,7 +2,7 @@
  * @Author: tyutjohn 
  * @Date: 2019-12-30 16:45:48 
  * @Last Modified by: tyutjohn
- * @Last Modified time: 2020-01-05 22:27:29
+ * @Last Modified time: 2020-01-09 08:55:22
  */
 # 后台开发日志
 /*
@@ -391,6 +391,36 @@ app.use('students',students);
 /**
  * @router DELETC api/students/:id
  * @desc 删除献血者信息
+ * @access 接口是私密的
+ */
+
+ /**
+ * @router POST api/students/report/:id
+ * @desc 记录学生体验指标
+ * @access 接口是私密的
+ */
+
+ /**
+ * @router GET api/students/class/
+ * @desc 获取学生班级信息
+ * @access 接口是私密的
+ */
+
+ /**
+ * @router GET api/students/class/:class
+ * @desc 获取班级学生列表 
+ * @access 接口是私密的
+ */
+
+ /**
+ * @router GET api/students/all
+ * @desc 获取学生个人的综合信息
+ * @access 接口是私密的
+ */
+
+ /**
+ * @router api/students/issuecount
+ * @desc 统计各类常见病人数
  * @access 接口是私密的
  */
  ```

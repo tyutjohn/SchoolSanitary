@@ -2,10 +2,50 @@
  * @Author: tyutjohn 
  * @Date: 2019-12-30 15:15:20 
  * @Last Modified by: tyutjohn
- * @Last Modified time: 2020-01-08 08:44:46
+ * @Last Modified time: 2020-01-10 17:52:13
  */
 # SchoolSanitary
 学校卫生管理系统
+
+# 系统启动
+```
+前台启动
+cnpm install 
+cnpm run serve
+
+后台启动
+cd server
+cnpm install
+cnpm install nodemon -g
+nodemon
+
+超级管理员注册
+接口地址
+@route api/users/register
+@access 公开
+@descript 字段:email（登录的账号), password,password2,name,grade(0为超级管理员，1为普通管理员) 
+
+超级管理员注册后，在/server/routes/api/users.js中，第45至52行，将管理员查询权限开启
+    // const authority = await User.findOne({
+    //     email: ctx.request.body.authority
+    // })
+    // if (authority.grade == 1) {
+    //     ctx.status = 400;
+    //     ctx.body = '权限不足';
+    //     return;
+    // }
+去掉上面代码的注释
+```
+
+# 项目打包部署
+```
+前台
+cnpm run bulid
+nginx代理配置
+后台端口：http://localhost:3000/api/
+后台
+nodemon
+```
 
 # 系统功能
 * 卫生工作组成员管理
@@ -59,7 +99,7 @@ StudentBody     \\学生体验管理模块        --完成
 CommonDisease   \\常见病管理模块          --完成
 StudentDisease  \\学生常见病管理模块      --完成
 PublicBlood     \\公益献血模块            --完成
-StudentSys      \\综合体质管理
+StudentSys      \\综合体质管理             --完成     
 ```
 ## UI设计
 * view页
