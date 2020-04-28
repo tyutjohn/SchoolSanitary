@@ -2,7 +2,7 @@
   "name": "vue-cli",
   "version": "0.1.0",
   "private": true,
-  "homepage":"https://tyutjohn.github.io/SchoolSanitary"
+  "homepage":"https://tyutjohn.github.io/SchoolSanitary",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
