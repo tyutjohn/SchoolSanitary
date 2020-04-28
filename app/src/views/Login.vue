@@ -124,7 +124,7 @@
           if (err.response.status == 404) {
             this.$message.error(err.response.data.email)
           } else if (err.response.status == 400) {
-            this.$message.error(err.response.data.password)
+            this.$message.error(JSON.stringify(err.response.data))
           } else {
             this.$message.error(err.message)
           }

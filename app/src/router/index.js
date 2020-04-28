@@ -9,6 +9,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login'
 import Home from '../views/Home'
+import SuperAdmin from '../views/SuperAdmin.vue'
 import Adminuser from '../components/Adminuser'
 import HeathActivity from '../components/HeathActivity'
 import HeathTeach from '../components/HeathTeach'
@@ -99,6 +100,11 @@ const routes = [{
     name:'Error404',
     component:Error404
   },{
+    path:'/SuperAdmin',
+    name:'SuperAdmin',
+    component:SuperAdmin
+  },
+  {
     path:"*", //置于最底部
     redirect:'/Error404'
   }

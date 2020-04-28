@@ -12,7 +12,7 @@ const gravatar = require('gravatar');
 const jwt = require('jsonwebtoken');
 const secretOrKey = require('../../config/mongodb').secretOrKey;
 const passport = require('koa-passport');
-const mongoose=require('mongoose')
+const mongoose = require('mongoose')
 
 //引入User
 const User = require('../../models/User');
@@ -36,20 +36,81 @@ router.get('/test', async ctx => {
 });
 
 /**
- * @route POST api/users/register
- * @desc 注册接口地址
+ * @router POST api/users/super
+ * @des 超级管理员注册地址
  * @access 接口是公开的
  */
-router.post('/register', async ctx => {
+router.post('/super', async ctx => {
+    //查询是否已经初始化
+    const result = await User.find().then(res => {
+        return res
+    })
+
+    if (result.length > 0) {
+        ctx.body = '超级管理员已注册，请前往登录页面'
+        ctx.status=201
+    } else {
+        const {
+            errors,
+            isValid
+        } = validateRegisterInput(ctx.request.body);
+        //判断是否验证通过
+        if (!isValid) {
+            ctx.status = 400;
+            ctx.body = errors;
+            return;
+        }
+
+        const avatar = gravatar.url(ctx.request.body.email, {
+            s: '200',
+            r: 'pg',
+            d: 'mm'
+        });
+        const newUser = new User({
+            name: ctx.request.body.name,
+            email: ctx.request.body.email,
+            avatar,
+            password: ctx.request.body.password,
+            grade:0
+        });
+
+        //加密密码
+        newUser.password = await new Promise((res, rej) => {
+            bcrypt.hash(newUser.password, 10, function (err, hash) {
+                if (err) rej(err)
+                res(hash)
+            });
+        })
+
+        //存储到数据库
+        await newUser.save().then(user => {
+            ctx.body = user;
+        }).catch(err => {
+            console.log(err)
+        });
+
+        //返回json数据
+        ctx.body = newUser;
+    }
+});
+
+/**
+ * @route POST api/users/register
+ * @desc 注册接口地址
+ * @access 接口是私密的
+ */
+router.post('/register',passport.authenticate('jwt',{
+    session:false
+}),async ctx => {
     //查询权限
-    // const authority = await User.findOne({
-    //     email: ctx.request.body.authority
-    // })
-    // if (authority.grade == 1) {
-    //     ctx.status = 400;
-    //     ctx.body = '权限不足';
-    //     return;
-    // }
+    const authority = await User.findOne({
+        email: ctx.request.body.authority
+    })
+    if (authority.grade == 1) {
+        ctx.status = 400;
+        ctx.body = '权限不足';
+        return;
+    }
     const {
         errors,
         isValid
@@ -193,15 +254,17 @@ router.get('/', passport.authenticate('jwt', {
     session: false
 }), async ctx => {
     //权限设置
-    if (ctx.request.query.grade==1) {
+    if (ctx.request.query.grade == 1) {
         //查询自身
-        let _id=mongoose.Types.ObjectId(ctx.request.query.id)
-        await User.find({_id:_id},(err,docs)=>{
-            if(err){
-                ctx.status==400
-                ctx.body=err
-            }else{
-                ctx.body=docs
+        let _id = mongoose.Types.ObjectId(ctx.request.query.id)
+        await User.find({
+            _id: _id
+        }, (err, docs) => {
+            if (err) {
+                ctx.status == 400
+                ctx.body = err
+            } else {
+                ctx.body = docs
             }
         })
     } else {

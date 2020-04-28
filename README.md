@@ -1,40 +1,37 @@
-/*
- * @Author: tyutjohn 
- * @Date: 2019-12-30 15:15:20 
- * @Last Modified by: tyutjohn
- * @Last Modified time: 2020-01-10 17:52:13
- */
 # SchoolSanitary
 学校卫生管理系统
 
+
+
+# 项目架构
+
+######   *server端*      ![node](https://img.shields.io/badge/node-v12.14.0-informational) ![koa](https://img.shields.io/badge/koa-v2.11.0-informational) ![mongoose](https://img.shields.io/badge/mongoose-v5.9.10-informational) 
+
+######   app端  ![vue](https://img.shields.io/badge/vue-v2.6.11-informational) ![vuecli](https://img.shields.io/badge/vuecli-v4.3.0-informational) ![element](https://img.shields.io/badge/element-v2.13.1-informational) ![echarts](https://img.shields.io/badge/echarts-v4.7.0-informational) ![axios](https://img.shields.io/badge/axios-v0.19.2-informational) 
+
+
+
 # 系统启动
 ```
+环境搭建
+nodejs安装(https://nodejs.org/en/)
+docker安装mongodb数据库(建议)
+
 前台启动
+cd app
 cnpm install 
 cnpm run serve
 
 后台启动
 cd server
 cnpm install
-cnpm install nodemon -g
 nodemon
 
-超级管理员注册
-接口地址
-@route api/users/register
-@access 公开
-@descript 字段:email（登录的账号), password,password2,name,grade(0为超级管理员，1为普通管理员) 
+超级管理员注册地址
+http://localhost:8080/Superadmin
 
-超级管理员注册后，在/server/routes/api/users.js中，第45至52行，将管理员查询权限开启
-    // const authority = await User.findOne({
-    //     email: ctx.request.body.authority
-    // })
-    // if (authority.grade == 1) {
-    //     ctx.status = 400;
-    //     ctx.body = '权限不足';
-    //     return;
-    // }
-去掉上面代码的注释
+登录地址
+http://localhost:8080/Login
 ```
 
 # 项目打包部署
